@@ -1,15 +1,16 @@
 class Solution:
     def getSum(self, a: int, b: int) -> int:
-        # Mask to limit the integers to 32 bits
+        # Use 32-bit mask to simulate integer overflow behavior
         MASK = 0xFFFFFFFF
-        INT_MAX = 0x7FFFFFFF
+        MAX_INT = 0x7FFFFFFF
         
         while b != 0:
-            # Carry is AND operation shifted left by 1
+            # carry: common bits of a and b
             carry = (a & b) & MASK
-            # Sum without carry is XOR
+            # a becomes XOR of a and b (sum without carry)
             a = (a ^ b) & MASK
+            # carry is added to a by shifting it left by 1
             b = (carry << 1) & MASK
-        
-        # If a is negative in 32-bit representation, convert to Python's integer
-        return a if a <= INT_MAX else ~(a ^ MASK)
+
+        # if a is greater than max int, it's a negative number in 32-bit
+        return a if a <= MAX_INT else ~(a ^ MASK)
