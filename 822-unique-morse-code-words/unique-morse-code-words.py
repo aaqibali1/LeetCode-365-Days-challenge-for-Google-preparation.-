@@ -7,7 +7,6 @@ class Solution:
         ]
         transformations = set()
         for word in words:
-            morse_word = ''.join(morse_codes[ord(char) - ord('a')] 
-            for char in word)
+            morse_word = ''.join(morse_codes[ord(char) - ord('a')] for char in word)
             transformations.add(morse_word)
         return len(transformations)
